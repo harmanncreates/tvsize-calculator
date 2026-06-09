@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faqs = [
+  {
+    q: "What's the best TV size for 10 feet away?",
+    a: "For a 10-foot viewing distance with a 4K TV, a 65-inch TV is ideal. The formula is simple: distance (feet) × 7.5 = recommended size in inches. So 10 × 7.5 = 75, and we round to the nearest common size, which is 65 or 75 inches. Either works great."
+  },
+  {
+    q: "Should I buy a 55 inch or 65 inch TV for my living room?",
+    a: "It depends on how far you sit! If you sit 7-8 feet away, a 55-inch is perfect. If you sit 9-10 feet away, go for 65 inches. A bigger TV is almost always better — the most common regret people have is buying too small, not too big."
+  },
+  {
+    q: "Does it matter if I buy 4K or 1080p for TV size?",
+    a: "Yes. With a 4K TV, you can sit much closer without seeing any pixels, so you can go bigger at the same distance. For 1080p, the formula is distance × 5.5. So at 8 feet, a 4K TV should be 60 inches, while a 1080p TV should be around 44 inches."
+  },
+  {
+    q: "Is a 75 inch TV too big for a bedroom?",
+    a: "Usually yes, for most bedrooms. In a bedroom, people typically sit 5-7 feet from the TV, where a 40-55 inch TV is ideal. A 75-inch TV works well in living rooms where you sit 10-12 feet away. That said, there's no such thing as 'too big' if you have the room — just make sure you won't feel overwhelmed."
+  },
+  {
+    q: "What TV size is best for a small apartment?",
+    a: "In a small apartment where you're typically 5-6 feet from the TV, a 43-50 inch 4K TV is the sweet spot. It fills your view nicely without being overwhelming. If your space is really tight (under 5 feet), a 40-43 inch TV keeps things comfortable."
+  },
+  {
+    q: "Do I need to worry about viewing angle when buying a TV?",
+    a: "Not much for most buyers. The calculator here already accounts for a comfortable viewing angle (around 30°). Just match your TV size to your sitting distance and you'll be fine. Only worry about viewing angle if multiple people often watch from very different seats."
+  },
+];
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a
+    }
+  }))
+};
+---
+
+<Base
+  title="TV Size FAQ - Common Questions About Choosing TV Size"
+  description="Simple answers to the most common TV size questions. What size TV for 10 feet? 55 or 65 inch? All answered here."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+  <div class="max-w-3xl mx-auto px-4 py-10 sm:py-16">
+
+    <div class="text-center mb-12">
+      <h1 class="font-display text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+        TV Size FAQ
+      </h1>
+      <p class="text-gray-500 dark:text-gray-400 text-lg">
+        Real questions. Plain answers. No jargon.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      {faqs.map((faq, i) => (
+        <details
+          class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden"
+        >
+          <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none font-semibold text-gray-900 dark:text-white text-base hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
+            <span>{faq.q}</span>
+            <svg class="w-5 h-5 shrink-0 text-gray-400 group-open:rotate-180 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </summary>
+          <div class="px-6 pb-5 text-gray-600 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-800 pt-4">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <div class="mt-12 text-center">
+      <p class="text-gray-500 dark:text-gray-400 mb-4">Still not sure? Use the calculator.</p>
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-3 rounded-xl transition-colors"
+      >
+        📺 Open Calculator
+      </a>
+    </div>
+
+  </div>
+</Base>
